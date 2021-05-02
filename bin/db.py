@@ -48,6 +48,20 @@ limit = Table(
 )
 
 
+hist_count = Table(
+    'hist_count', meta,
+
+    Column('id', Integer, primary_key=True),
+    Column('country', String(200), nullable=False),
+    Column('amount', Float, nullable=False),
+    Column('cur', String(200), nullable=False),
+    Column('date_ym', String(8), nullable=False),
+    Column('client_id',
+           Integer,
+           ForeignKey('client.id', ondelete='CASCADE'))
+)
+
+
 transfer_history = Table(
     'history', meta,
 

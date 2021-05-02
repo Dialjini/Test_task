@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, MetaData
 from bin.settings import config
-from bin.db import client, limit, transfer_history
+from bin.db import client, limit, transfer_history, hist_count
 from random import randint
 
 
@@ -9,7 +9,7 @@ DSN = "postgresql://{user}:{password}@{host}:{port}/{database}"
 
 def create_tables(engine):
     meta = MetaData()
-    meta.create_all(bind=engine, tables=[client, limit, transfer_history])
+    meta.create_all(bind=engine, tables=[client, limit, transfer_history, hist_count])
 
 
 def sample_data(engine):
@@ -22,13 +22,17 @@ def sample_data(engine):
     country_array = ['RUS', 'ABH', 'AUS']
     cur_array = ['RUB', 'USD', 'EUR']
 
+    country_counter = 0
     for i in range(9):  # fill limits
         conn.execute(limit.insert(), [
                 {'cur': cur_array[i % 3],
-                 'country': country_array[i % 3],
-                 'amount': amount_array[randint(0, len(amount_array))],
+                 'country': country_array[country_counter],
+                 'amount': amount_array[randint(0, len(amount_array) - 1)],
                  'client_id': 1}
             ])
+
+        if i % 3 == 2:
+            country_counter += 1
 
 
 if __name__ == '__main__':
