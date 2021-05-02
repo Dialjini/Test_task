@@ -15,7 +15,7 @@ def create_tables(engine):
 def sample_data(engine):
     conn = engine.connect()
     conn.execute(client.insert(), [
-        {'name': 'Test Client', 'token': 'fhe2w7iou5oe3wh'}
+        {'name': 'Test Client', 'token': 'fhe2w7iou5oe3wh', 'password': 'test'}
     ])
 
     amount_array = [15000, 50000, 100000, 25000, 35000, 40000, 45000, 30000, 80000, 90000]
@@ -23,7 +23,6 @@ def sample_data(engine):
     cur_array = ['RUB', 'USD', 'EUR']
 
     for i in range(9):  # fill limits
-        print(i)
         conn.execute(limit.insert(), [
                 {'cur': cur_array[i % 3],
                  'country': country_array[i % 3],
