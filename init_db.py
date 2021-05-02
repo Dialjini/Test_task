@@ -1,8 +1,9 @@
-from sqlalchemy import create_engine, MetaData
-from bin.settings import config
-from bin.db import client, limit, transfer_history, hist_count
 from random import randint
 
+from sqlalchemy import create_engine, MetaData
+
+from bin.db import client, limit, transfer_history, hist_count
+from bin.settings import config
 
 DSN = "postgresql://{user}:{password}@{host}:{port}/{database}"
 
@@ -25,11 +26,11 @@ def sample_data(engine):
     country_counter = 0
     for i in range(9):  # fill limits
         conn.execute(limit.insert(), [
-                {'cur': cur_array[i % 3],
-                 'country': country_array[country_counter],
-                 'amount': amount_array[randint(0, len(amount_array) - 1)],
-                 'client_id': 1}
-            ])
+            {'cur': cur_array[i % 3],
+             'country': country_array[country_counter],
+             'amount': amount_array[randint(0, len(amount_array) - 1)],
+             'client_id': 1}
+        ])
 
         if i % 3 == 2:
             country_counter += 1

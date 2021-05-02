@@ -47,7 +47,6 @@ limit = Table(
            ForeignKey('client.id', ondelete='CASCADE'))
 )
 
-
 hist_count = Table(
     'hist_count', meta,
 
@@ -60,7 +59,6 @@ hist_count = Table(
            Integer,
            ForeignKey('client.id', ondelete='CASCADE'))
 )
-
 
 transfer_history = Table(
     'history', meta,

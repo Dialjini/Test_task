@@ -1,4 +1,5 @@
-from views import get_limits, add_limit, update_limit, delete_limit, get_history, add_transfer, delete_history, update_transfer, add_client, update_client, delete_client, get_client
+from views import get_limits, add_limit, update_limit, delete_limit, get_history, add_transfer, delete_history, \
+    update_transfer, add_client, update_client, delete_client, get_client
 
 
 def setup_routes(app):

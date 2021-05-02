@@ -1,6 +1,8 @@
-from aiohttp import web
-import db
 from datetime import datetime
+
+from aiohttp import web
+
+import db
 
 
 async def get_limits(request):
@@ -53,7 +55,7 @@ async def update_limit(request):
 async def get_history(request):
     async with request.app['db'].acquire() as conn:
         cursor = await conn.execute(db.transfer_history.select(
-                                    db.transfer_history.c.client_id == int(request.query['id'])))
+            db.transfer_history.c.client_id == int(request.query['id'])))
         records = await cursor.fetchall()
         history = []
         for i in records:
@@ -75,7 +77,8 @@ async def add_transfer(request):
 
         date = datetime.now()
         count_conn = await conn.execute(db.hist_count.select(  # get month counter table county and currency
-            db.hist_count.c.cur == req['cur'] and db.hist_count.c.country == req['country'] and db.hist_count.c.date_ym == '{0}.{1}'.format(date.year, date.month)))
+            db.hist_count.c.cur == req['cur'] and db.hist_count.c.country == req[
+                'country'] and db.hist_count.c.date_ym == '{0}.{1}'.format(date.year, date.month)))
         count_table = await count_conn.fetchone()
 
         if not count_table:  # if table not exist create it
@@ -111,10 +114,10 @@ async def update_transfer(request):
     req = await request.post()
     async with request.app['db'].acquire() as conn:
         await conn.execute(db.transfer_history.update().where(db.transfer_history.c.id == req['id']).values(
-                                                                                      country=req['country'],
-                                                                                      amount=float(req['amount']),
-                                                                                      cur=req['cur'],
-                                                                                      client_id=req['client_id']))
+            country=req['country'],
+            amount=float(req['amount']),
+            cur=req['cur'],
+            client_id=req['client_id']))
 
         return web.json_response({'success': True, 'data': 'update transfer with id={0}'.format(str(req['id']))})
 
@@ -134,9 +137,9 @@ async def update_client(request):
     req = await request.post()
     async with request.app['db'].acquire() as conn:
         await conn.execute(db.client.update().where(db.client.c.id == req['id']).values(
-                                                            name=str(req['name']),
-                                                            password=str(req['password']),
-                                                            token='test_token_fudsk21'))
+            name=str(req['name']),
+            password=str(req['password']),
+            token='test_token_fudsk21'))
 
         return web.json_response({'success': True, 'data': 'update client with id={0}'.format(str(req['id']))})
 
