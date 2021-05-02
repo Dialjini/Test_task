@@ -46,18 +46,12 @@ async def delete_limit(request):
 async def update_limit(request):
     req = await request.post()
     async with request.app['db'].acquire() as conn:
-        exception = await conn.execute(db.limit.select(
-            db.limit.c.country == req['country'] and db.limit.c.cur == req['cur']))
-        record = await exception.fetchone()
-        # check if limit for this country and currency already exists
-        if record:
-            return web.json_response({'success': False, 'data': 'Limit exists.'}, status=400)
-        await conn.execute(db.limit.update().where(db.limit.c.id == req['id']).values(country=req['country'],
-                                                                                      amount=float(req['amount']),
-                                                                                      cur=req['cur'],
-                                                                                      client_id=req['client_id']))
+        await conn.execute(db.limit.update().where(
+            db.limit.c.client_id == req['client_id'] and db.limit.c.cur == req['cur'] and db.limit.c.country == req[
+                'country']).values(
+            amount=float(req['amount'])))
 
-        return web.json_response({'success': True, 'data': 'update limit with id={0}'.format(str(req['id']))})
+        return web.json_response({'success': True, 'data': 'update limit'})
 
 
 async def get_history(request):
@@ -76,7 +70,7 @@ async def get_history(request):
 async def add_transfer(request):
     req = await request.post()
 
-    async with request.app['db'].acquire() as conn:  # get limit table for exact county and currency
+    async with request.app['db'].acquire() as conn:  # get limit table for exact country and currency
         limit_conn = await conn.execute(db.limit.select(
             db.limit.c.cur == req['cur'] and db.limit.c.country == req['country']))
         limit = await limit_conn.fetchone()
@@ -140,7 +134,7 @@ async def add_client(request):
             cursor = await conn.execute(db.client.insert().values(name=str(req['name']),
                                                                   password=str(req['password']),
                                                                   token='test_token_fudsk21'))
-        except IntegrityError:
+        except Exception:
             return web.json_response({'success': False, 'data': 'Not unique username'}, status=400)
         record = await cursor.fetchone()
 
@@ -154,9 +148,9 @@ async def update_client(request):
             await conn.execute(db.client.update().where(db.client.c.id == req['id']).values(
                 name=str(req['name']),
                 password=str(req['password']),
-                token='test_token_fudsk21'))
+                token='test_token_fudsk2'))
 
-        except IntegrityError:
+        except Exception:
             return web.json_response({'success': False, 'data': 'Not unique username'}, status=400)
 
         return web.json_response({'success': True, 'data': 'update client with id={0}'.format(str(req['id']))})
