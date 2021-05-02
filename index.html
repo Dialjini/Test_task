@@ -1,0 +1,849 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Test task</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>Test task</h1>
+    <div class="app-desc">API для тестового задания</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="kustovdanil2@gmail.com">kustovdanil2@gmail.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/Dialjini/Test_task_api/1.0.0</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Client">Client</a></h4>
+  <ul>
+  <li><a href="#addСlient"><code><span class="http-method">post</span> /client</code></a></li>
+  <li><a href="#deleteClient"><code><span class="http-method">delete</span> /client</code></a></li>
+  <li><a href="#deleteLimit"><code><span class="http-method">delete</span> /limits</code></a></li>
+  <li><a href="#getClient"><code><span class="http-method">get</span> /client</code></a></li>
+  <li><a href="#updateClient"><code><span class="http-method">put</span> /client</code></a></li>
+  </ul>
+  <h4><a href="#Limit">Limit</a></h4>
+  <ul>
+  <li><a href="#addLimit"><code><span class="http-method">post</span> /limits</code></a></li>
+  <li><a href="#getLimit"><code><span class="http-method">get</span> /limits</code></a></li>
+  <li><a href="#updateLimit"><code><span class="http-method">put</span> /limits</code></a></li>
+  </ul>
+  <h4><a href="#Transfer">Transfer</a></h4>
+  <ul>
+  <li><a href="#addtransfer"><code><span class="http-method">post</span> /transfer</code></a></li>
+  <li><a href="#deleteHistory"><code><span class="http-method">delete</span> /history</code></a></li>
+  <li><a href="#getTransfer"><code><span class="http-method">get</span> /history</code></a></li>
+  <li><a href="#updateTransfer"><code><span class="http-method">put</span> /transfer</code></a></li>
+  </ul>
+
+  <h1><a name="Client">Client</a></h1>
+  <div class="method"><a name="addСlient"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /client</code></pre></div>
+    <div class="method-summary">Добавление нового клиента (<span class="nickname">addСlient</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/x-www-form-urlencoded</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Имя пользователя </div><div class="param">password (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Пароль </div>
+    </div>  <!-- field-items -->
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+    <h4 class="field-label">400</h4>
+    Неуникальное имя пользователя или отсутствуют обязательные параметры.
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteClient"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /client</code></pre></div>
+    <div class="method-summary">Удаление клиента по id (<span class="nickname">deleteClient</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteLimit"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /limits</code></pre></div>
+    <div class="method-summary">Удаление лимита по id (<span class="nickname">deleteLimit</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getClient"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /client</code></pre></div>
+    <div class="method-summary">Получение списка клиентов (<span class="nickname">getClient</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Client">Client</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "password" : "test_password",
+  "transfer_history" : {
+    "date" : "{}",
+    "country" : "AUS",
+    "cur" : "USD",
+    "id" : 5,
+    "client_id" : 5
+  },
+  "hist_count" : {
+    "country" : "AUS",
+    "cur" : "USD",
+    "date_ym" : "2021.3",
+    "id" : 2,
+    "client_id" : 7
+  },
+  "limit" : {
+    "country" : "AUS",
+    "cur" : "USD",
+    "id" : 6,
+    "client_id" : 1
+  },
+  "name" : "Test_client",
+  "id" : 0
+}, {
+  "password" : "test_password",
+  "transfer_history" : {
+    "date" : "{}",
+    "country" : "AUS",
+    "cur" : "USD",
+    "id" : 5,
+    "client_id" : 5
+  },
+  "hist_count" : {
+    "country" : "AUS",
+    "cur" : "USD",
+    "date_ym" : "2021.3",
+    "id" : 2,
+    "client_id" : 7
+  },
+  "limit" : {
+    "country" : "AUS",
+    "cur" : "USD",
+    "id" : 6,
+    "client_id" : 1
+  },
+  "name" : "Test_client",
+  "id" : 0
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateClient"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /client</code></pre></div>
+    <div class="method-summary">Обновление существующего клиента (<span class="nickname">updateClient</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/x-www-form-urlencoded</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Имя пользователя </div><div class="param">password (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Пароль </div>
+    </div>  <!-- field-items -->
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">400</h4>
+    Повторяющееся имя пользователя
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Limit">Limit</a></h1>
+  <div class="method"><a name="addLimit"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /limits</code></pre></div>
+    <div class="method-summary">Добавление нового лимита (<span class="nickname">addLimit</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/x-www-form-urlencoded</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">country (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Обозначение страны </div><div class="param">amount (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Сумма </div><div class="param">cur (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Обозначение валюты </div><div class="param">client_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; id клиента </div>
+    </div>  <!-- field-items -->
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">400</h4>
+    Такой лимит уже существует
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getLimit"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /limits</code></pre></div>
+    <div class="method-summary">Получение списка лимитов (<span class="nickname">getLimit</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Limit">Limit</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "country" : "AUS",
+  "cur" : "USD",
+  "id" : 6,
+  "client_id" : 1
+}, {
+  "country" : "AUS",
+  "cur" : "USD",
+  "id" : 6,
+  "client_id" : 1
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateLimit"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /limits</code></pre></div>
+    <div class="method-summary">Обновление существующего лимита (<span class="nickname">updateLimit</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/x-www-form-urlencoded</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">country (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Обозначение страны </div><div class="param">amount (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Сумма </div><div class="param">cur (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Валюта </div><div class="param">client_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; id клиента </div><div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; id лимита </div>
+    </div>  <!-- field-items -->
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">400</h4>
+    Повторяющийся лимит
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Transfer">Transfer</a></h1>
+  <div class="method"><a name="addtransfer"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /transfer</code></pre></div>
+    <div class="method-summary">Добавление нового трансфера (<span class="nickname">addtransfer</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/x-www-form-urlencoded</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">country (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Обозначение страны </div><div class="param">amount (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Сумма </div><div class="param">cur (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Обозначение валюты </div><div class="param">client_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; id клиента </div>
+    </div>  <!-- field-items -->
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">406</h4>
+    Превышен лимит
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteHistory"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /history</code></pre></div>
+    <div class="method-summary">Удаление истории по id (<span class="nickname">deleteHistory</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getTransfer"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /history</code></pre></div>
+    <div class="method-summary">Получение списка трансферов (<span class="nickname">getTransfer</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#TransferHistory">TransferHistory</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "date" : "{}",
+  "country" : "AUS",
+  "cur" : "USD",
+  "id" : 5,
+  "client_id" : 5
+}, {
+  "date" : "{}",
+  "country" : "AUS",
+  "cur" : "USD",
+  "id" : 5,
+  "client_id" : 5
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateTransfer"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /transfer</code></pre></div>
+    <div class="method-summary">Обновление существующего трансфера (<span class="nickname">updateTransfer</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/x-www-form-urlencoded</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">country (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Обозначение страны </div><div class="param">amount (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Сумма </div><div class="param">cur (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; Валюта </div><div class="param">client_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; id клиента </div><div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; id трансфера </div>
+    </div>  <!-- field-items -->
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Client"><code>Client</code> - </a></li>
+    <li><a href="#HistCount"><code>HistCount</code> - </a></li>
+    <li><a href="#Limit"><code>Limit</code> - </a></li>
+    <li><a href="#TransferHistory"><code>TransferHistory</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Client"><code>Client</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">limit (optional)</div><div class="param-desc"><span class="param-type"><a href="#Limit">Limit</a></span>  </div>
+<div class="param">transfer_history (optional)</div><div class="param-desc"><span class="param-type"><a href="#TransferHistory">TransferHistory</a></span>  </div>
+<div class="param">hist_count (optional)</div><div class="param-desc"><span class="param-type"><a href="#HistCount">HistCount</a></span>  </div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: Test_client</span></div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+          <div class="param-desc"><span class="param-type">example: test_password</span></div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="HistCount"><code>HistCount</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">client_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">date_ym </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Год и месяц через точку, для счета трансферов каждый месяц. </div>
+          <div class="param-desc"><span class="param-type">example: 2021.3</span></div>
+<div class="param">country </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Страна – строковое сокращение </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">AUS</div><div class="param-enum">ABH</div><div class="param-enum">RUS</div>
+<div class="param">cur </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Валюта – строковое сокращение </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">USD</div><div class="param-enum">EUR</div><div class="param-enum">RUB</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Limit"><code>Limit</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">client_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">country </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Страна – строковое сокращение </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">AUS</div><div class="param-enum">ABH</div><div class="param-enum">RUS</div>
+<div class="param">cur </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Валюта – строковое сокращение </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">USD</div><div class="param-enum">EUR</div><div class="param-enum">RUB</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="TransferHistory"><code>TransferHistory</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">client_id (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">date </div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> DateTime </div>
+<div class="param">country </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Страна – строковое сокращение </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">AUS</div><div class="param-enum">ABH</div><div class="param-enum">RUS</div>
+<div class="param">cur </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Валюта – строковое сокращение </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">USD</div><div class="param-enum">EUR</div><div class="param-enum">RUB</div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

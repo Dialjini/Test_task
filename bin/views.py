@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from aiohttp import web
+from sqlalchemy.exc import IntegrityError
 
 import db
 
@@ -22,7 +23,8 @@ async def add_limit(request):
         record = await exception.fetchone()
         # check if limit for this country and currency already exists
         if record:
-            return web.json_response({'success': False, 'data': 'Limit exists. Please use PUT method for update.'})
+            return web.json_response({'success': False, 'data': 'Limit exists. Please use PUT method for update.'},
+                                     status=400)
 
         cursor = await conn.execute(db.limit.insert().values(country=req['country'],
                                                              amount=float(req['amount']),
@@ -44,6 +46,12 @@ async def delete_limit(request):
 async def update_limit(request):
     req = await request.post()
     async with request.app['db'].acquire() as conn:
+        exception = await conn.execute(db.limit.select(
+            db.limit.c.country == req['country'] and db.limit.c.cur == req['cur']))
+        record = await exception.fetchone()
+        # check if limit for this country and currency already exists
+        if record:
+            return web.json_response({'success': False, 'data': 'Limit exists.'}, status=400)
         await conn.execute(db.limit.update().where(db.limit.c.id == req['id']).values(country=req['country'],
                                                                                       amount=float(req['amount']),
                                                                                       cur=req['cur'],
@@ -73,7 +81,7 @@ async def add_transfer(request):
             db.limit.c.cur == req['cur'] and db.limit.c.country == req['country']))
         limit = await limit_conn.fetchone()
         if limit.amount < float(req['amount']):  # compare limit and transfer
-            return web.json_response({'success': False, 'data': 'Limit exceeded.'})
+            return web.json_response({'success': False, 'data': 'Limit exceeded.'}, status=406)
 
         date = datetime.now()
         count_conn = await conn.execute(db.hist_count.select(  # get month counter table county and currency
@@ -89,7 +97,7 @@ async def add_transfer(request):
                                                              date_ym='{0}.{1}'.format(date.year, date.month)))
 
         elif (count_table.amount + float(req['amount'])) > limit.amount:  # compare counted amount with transfer
-            return web.json_response({'success': False, 'data': 'Limit exceeded.'})
+            return web.json_response({'success': False, 'data': 'Limit exceeded.'}, status=406)
 
         # create transfer after all comparisons
         cursor = await conn.execute(db.transfer_history.insert().values(country=req['country'],
@@ -98,6 +106,9 @@ async def add_transfer(request):
                                                                         client_id=req['client_id'],
                                                                         date=date))
         record = await cursor.fetchone()
+        if count_table:
+            await conn.execute(db.hist_count.update().where(db.hist_count.c.id == count_table.id).values(
+                amount=(count_table.amount + float(req['amount']))))
 
     return web.json_response({'success': True, 'data': dict(record)})
 
@@ -125,9 +136,12 @@ async def update_transfer(request):
 async def add_client(request):
     req = await request.post()
     async with request.app['db'].acquire() as conn:
-        cursor = await conn.execute(db.client.insert().values(name=str(req['name']),
-                                                              password=str(req['password']),
-                                                              token='test_token_fudsk21'))
+        try:
+            cursor = await conn.execute(db.client.insert().values(name=str(req['name']),
+                                                                  password=str(req['password']),
+                                                                  token='test_token_fudsk21'))
+        except IntegrityError:
+            return web.json_response({'success': False, 'data': 'Not unique username'}, status=400)
         record = await cursor.fetchone()
 
     return web.json_response({'success': True, 'data': dict(record)})
@@ -136,10 +150,14 @@ async def add_client(request):
 async def update_client(request):
     req = await request.post()
     async with request.app['db'].acquire() as conn:
-        await conn.execute(db.client.update().where(db.client.c.id == req['id']).values(
-            name=str(req['name']),
-            password=str(req['password']),
-            token='test_token_fudsk21'))
+        try:
+            await conn.execute(db.client.update().where(db.client.c.id == req['id']).values(
+                name=str(req['name']),
+                password=str(req['password']),
+                token='test_token_fudsk21'))
+
+        except IntegrityError:
+            return web.json_response({'success': False, 'data': 'Not unique username'}, status=400)
 
         return web.json_response({'success': True, 'data': 'update client with id={0}'.format(str(req['id']))})
 

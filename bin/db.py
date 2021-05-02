@@ -30,8 +30,8 @@ client = Table(
     'client', meta,
 
     Column('id', Integer, primary_key=True),
-    Column('name', String(200), nullable=False),
-    Column('password', String(200), nullable=False, unique=True),
+    Column('name', String(200), nullable=False, unique=True),
+    Column('password', String(200), nullable=False),
     Column('token', String(200), nullable=False, unique=True)
 )
 
