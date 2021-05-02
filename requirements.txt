@@ -1,0 +1,6 @@
+aiohttp==3.7.4.post0
+SQLAlchemy==1.3.24
+importlib-metadata==4.0.1
+zipp==3.4.1
+PyYAML==5.4.1
+aiopg==1.2.1
